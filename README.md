@@ -6,6 +6,7 @@ Shared [Cursor Agent Skills](https://cursor.com/docs/context/skills) for Smeetz.
 
 | Skill | Description |
 |-------|-------------|
+| [commit-message](skills/commit-message/) | Generate commit messages in the strict semicolon-separated 5-field schema (type, scope, summary, body, footer) aligned with Change log Process and n8n → Intercom. Use when the user or agent makes commits via Chat or when asked to suggest a commit message. |
 | [_template](skills/_template/) | Template for creating new skills. Copy this folder and edit `SKILL.md`. |
 
 *(Add new rows as you add skills; descriptions can be taken from each skill’s `SKILL.md` frontmatter.)*
