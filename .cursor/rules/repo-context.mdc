@@ -1,0 +1,13 @@
+---
+description: This repo is Smeetz shared Cursor Agent Skills; add skills under skills/<name>/ with SKILL.md
+alwaysApply: true
+---
+
+# Cursor Shared Skills Repo
+
+This repository contains **shared Cursor Agent Skills** for Smeetz. It is not a product codebase.
+
+- **Skills** live in `skills/<skill-name>/`. Each skill has a required `SKILL.md` (YAML frontmatter `name`, `description` + body) and optional `scripts/`, `references/`, `assets/`.
+- **Only non–project-specific** skills belong here. Project-specific skills stay in each project’s `.cursor/skills/`.
+- **Adding a skill:** Copy `skills/_template/` to `skills/<skill-name>/`, edit `SKILL.md`, update the README skills table. See [CONTRIBUTING.md](../CONTRIBUTING.md).
+- **Content language:** English only for all skill content and repo docs.
