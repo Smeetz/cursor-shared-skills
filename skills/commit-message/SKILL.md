@@ -33,7 +33,7 @@ When generating a commit message, follow these steps:
 
 4. **Draft body:** what and why (user-facing), not how in code. Max 200 characters. Full sentence. Generate from context (diff or user input).
 
-5. **Resolve footer:** Jira issue key in format `<project>-<id>` (e.g. L3-1234, FIS-456). Order: (1) if the user specified a task -- use it; (2) else try to extract from branch name (e.g. `feature/L3-1234` -> L3-1234); (3) else, in interactive Chat, ask the user for the Jira key and **wait for their answer instead of outputting a commit message**; (4) if, after asking, the user does not specify a key, does not know it, or says there is no ticket -- use **NOJIRA**. Validate format (letters, digits, hyphen only) so the Bitbucket->Jira link works.
+5. **Resolve footer:** Jira issue key in format `<project>-<id>` (e.g. L3-1234, FIS-456). Order: (1) if the user specified a task -- use it; (2) else try to extract from branch name (e.g. `feature/L3-1234` -> `L3-1234`); (3) else, in interactive Chat, ask the user for the Jira key and **wait for their answer instead of outputting a commit message**; (4) if, after asking, the user does not specify a key, does not know it, or says there is no ticket -- use **NOJIRA**. Validate the Jira key as `<project>-<id>` (for example `ABC-123`) and normalize extracted keys to uppercase so the Bitbucket->Jira link works.
 
 6. **Output the commit message as plain text only (after Step 5 is fully resolved):** If you still need to ask the user for the Jira key, do **not** output a commit message yet. Once the footer is resolved, output with no markdown, no code block, no commentary. **Each line must start with the field name** (`type:`, `scope:`, `summary:`, `body:`, `footer:`) followed by a space, the value, and a semicolon. Exactly 5 lines in this order, **with no blank lines between them** (one newline between each line). Ready to paste into `git commit`.
 
@@ -78,7 +78,7 @@ Use **only** scopes from [references/scopes.md](references/scopes.md). If the ch
 
 - **jira_key:** Jira issue key in the form **`<project>-<id>`** (e.g. `L3-1234`, `FIS-456`). Required for Bitbucket->Jira link.
 - **Order:** (1) user specified a task -> use it; (2) else extract from branch name; (3) else ask the user; (4) user does not specify or does not know -> **NOJIRA**.
-- **Validate** format (letters, digits, hyphen); otherwise the Bitbucket link will not work.
+- **Validate** Jira key format as `<project>-<id>` (for example `ABC-123`) and use letters, digits, and hyphen only; otherwise the Bitbucket->Jira link will not work.
 
 ### Constraints
 
