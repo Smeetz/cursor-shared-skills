@@ -76,7 +76,7 @@ Use **only** scopes from [references/scopes.md](references/scopes.md). If the ch
 
 ### Footer
 
-- **jira_key:** Jira issue key in the form **`<project>-<id>`** (e.g. L3-1234, FIS-456). Required for Bitbucket→Jira link.
+- **jira_key:** Jira issue key in the form **`<project>-<id>`** (e.g. `L3-1234`, `FIS-456`). Required for Bitbucket→Jira link.
 - **Order:** (1) user specified a task → use it; (2) else extract from branch name; (3) else ask the user; (4) user does not specify or does not know → **NOJIRA**.
 - **Validate** format (letters, digits, hyphen); otherwise the Bitbucket link will not work.
 
