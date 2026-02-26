@@ -33,9 +33,9 @@ When generating a commit message, follow these steps:
 
 4. **Draft body:** what and why (user-facing), not how in code. Max 200 characters. Full sentence. Generate from context (diff or user input).
 
-5. **Resolve footer:** Jira issue key in format `<project>-<id>` (e.g. L3-1234, FIS-456). Order: (1) if the user specified a task — use it; (2) else try to extract from branch name (e.g. `feature/L3-1234` → L3-1234); (3) else ask the user; (4) if the user does not specify or does not know — use **NOJIRA**. Validate format (letters, digits, hyphen only) so the Bitbucket→Jira link works.
+5. **Resolve footer:** Jira issue key in format `<project>-<id>` (e.g. L3-1234, FIS-456). Order: (1) if the user specified a task — use it; (2) else try to extract from branch name (e.g. `feature/L3-1234` → L3-1234); (3) else, in interactive Chat, ask the user for the Jira key and **wait for their answer instead of outputting a commit message**; (4) if, after asking, the user does not specify a key, does not know it, or says there is no ticket — use **NOJIRA**. Validate format (letters, digits, hyphen only) so the Bitbucket→Jira link works.
 
-6. **Output the commit message as plain text only:** no markdown, no code block, no commentary. **Each line must start with the field name** (`type:`, `scope:`, `summary:`, `body:`, `footer:`) followed by a space, the value, and a semicolon. Exactly 5 lines in this order, **with no blank lines between them** (one newline between each line). Ready to paste into `git commit`.
+6. **Output the commit message as plain text only (after Step 5 is fully resolved):** If you still need to ask the user for the Jira key, do **not** output a commit message yet. Once the footer is resolved, output with no markdown, no code block, no commentary. **Each line must start with the field name** (`type:`, `scope:`, `summary:`, `body:`, `footer:`) followed by a space, the value, and a semicolon. Exactly 5 lines in this order, **with no blank lines between them** (one newline between each line). Ready to paste into `git commit`.
 
 ---
 
@@ -48,8 +48,10 @@ type: <type>;
 scope: <scope>;
 summary: <summary>;
 body: <body>;
-footer: <issue_number>;
+footer: <jira_key>;
 ```
+
+**Footer:** `jira_key` is the Jira issue key in the form **`<project>-<id>`** (e.g. `L3-1234`, `FIS-456`). Use **NOJIRA** when no ticket applies.
 
 ### Type
 
@@ -74,7 +76,7 @@ Use **only** scopes from [references/scopes.md](references/scopes.md). If the ch
 
 ### Footer
 
-- Jira issue key: `<project>-<id>` (e.g. L3-1234, FIS-456). Required for Bitbucket→Jira link.
+- **jira_key:** Jira issue key in the form **`<project>-<id>`** (e.g. L3-1234, FIS-456). Required for Bitbucket→Jira link.
 - **Order:** (1) user specified a task → use it; (2) else extract from branch name; (3) else ask the user; (4) user does not specify or does not know → **NOJIRA**.
 - **Validate** format (letters, digits, hyphen); otherwise the Bitbucket link will not work.
 
@@ -142,11 +144,11 @@ Output the commit message **explicitly as plain text**:
 
 ---
 
-## Validation (Step 2)
+## Validation
 
 Repos may enforce this format via:
 
 - **Local:** `npx @smeetz/dev-standards commit` (Husky + Commitlint) — run from repo root.
 - **Server:** Bitbucket Push Checkers by regex as a second line of defence.
 
-This skill defines the format; validation enforces it. When Step 2 is set up, commit messages that do not match the schema will be rejected.
+This skill defines the format; validation enforces it. When validation is set up, commit messages that do not match the schema will be rejected.
